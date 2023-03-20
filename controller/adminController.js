@@ -336,26 +336,23 @@ deleteCategory = async (req, res) => {
 };
 
 const viewOrder = async (req, res) => {
-try{
 
+    console.log("viewing");
+  
 
+    const order = await orderModel.findOne({ _id: req.query.Id });
+    console.log(req.query.id);
 
-  const order = await orderModel.findById({ _id: req.query.Id });
-
-  const completeData = await order.populate("products.item.productId");
-
-
-  res.render("orderList", {
-    order: completeData.products.item,
-    session: req.session.user_id,
-  });
-}
- catch{
-  console.log(error);
- }
-
-}
-
+    const completeData = await order.populate("products.item.productId");
+    console.log(order);
+    console.log();
+    res.render("orderList", {
+      order: completeData.products.item,
+      
+      orders: order,
+    });
+  
+};
 const cancelorder = async (req, res) => {
 
 
