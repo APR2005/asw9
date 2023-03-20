@@ -119,5 +119,7 @@ router.post("/update", multer.upload.array("images"), adminController.editProduc
 
 router.post('/addBanner',multer.upload.array('bannerImage'),adminController.addBanner)
 
+router.get('*',(req,res)=>res.render('404'))
+
 
 module.exports = router;

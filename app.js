@@ -169,13 +169,13 @@ app.set('view engine', 'hbs');
 //    res.status(500).send("Something Broke!");
 // });
 
-// app.use((req,res,next)=>{
-//   res.status(404).render('admin/404')
-// })
+app.use((req,res,next)=>{
+  res.status(404).render('admin/404')
+})
 
-// app.use((err,req,res,next)=>{
-//   res.status(500).render('admin/404')
-// })
+app.use((err,req,res,next)=>{
+  res.status(500).render('admin/404')
+})
 
  
 app.listen(PORT, () => {
