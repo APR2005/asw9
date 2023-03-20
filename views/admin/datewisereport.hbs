@@ -1,0 +1,46 @@
+<div class="container">
+<body>
+    <h1>Date wise  Report</h1>
+    <a href="/admin/salesReport" class="btn btn-info">Go Back</a>
+<table id="myTab" class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Product</th>
+        {{!-- <th>image</th> --}}
+        <th>Category</th>
+        
+        <th>Price</th>
+        <th>Quantity Sold</th>
+        <th>Total Sales</th>
+      </tr>
+    </thead>
+    <tbody>
+           {{#each sales}}
+        <tr>
+          <td>{{name}}</td>
+          {{!-- <td> 
+            {{#limit image 1}}
+
+                    <img   src="assets/img/products/{{this}}" alt="IMG-PRODUCT"
+                    style="width: 45px; height: 45px"
+                  class="rounded-circle"
+                  />
+            {{/limit}}
+            </td> --}}
+          <td>{{category}}</td>
+          <td>{{price}}</td>
+          <td>{{quantity}}</td>
+             <td>{{math   price "*"quantity }}</td>
+          
+        </tr>
+                {{/each}}
+      
+      
+      </tbody>
+       
+    <footer>
+      
+    </footer>
+  </table>
+</body>
+</div>

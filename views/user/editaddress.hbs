@@ -1,0 +1,152 @@
+<!-- breadcrumb -->
+<div class="container">
+  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+    <a href="#" class="stext-109 cl8 hov-cl1 trans-04">
+      Home
+      <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </a>
+
+    <span class="stext-109 cl4">
+      Shoping Cart
+    </span>
+  </div>
+</div>
+
+<!-- Shoping Cart -->
+{{!-- <form class="bg0 p-t-75 p-b-85" action="/placeOrder" method="post"> --}}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+        <div class="m-l-25 m-r--38 m-lr-0-xl d-flex justify-content-between">
+          <div class="wrap-table-shopping-cart col-md-6">
+            <form action="/editAddress" method="post">
+              <div class="mb-3">
+                <label for="email" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="name"
+                  value={{address.name}}
+                  autofocus
+                />
+              </div>
+
+              <input type="hidden" name="id" value={{addressId}}>
+              <div class="mb-3">
+                <label for="email" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+             value={{address.mobile}}
+
+                  name="mobile"
+                  autofocus
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+             value={{address.address}}
+
+                  name="address"
+                  autofocus
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">City</label>
+                <input
+                  type="text"
+                                    value={{address.city}}
+
+                  class="form-control"
+                  id="email"
+                  name="city"
+                  autofocus
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">State</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                                    value={{address.state}}
+
+                  name="state"
+                  autofocus
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">pincode</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                                    value={{address.zip}}
+
+                  name="zip"
+                  autofocus
+                />
+              </div>
+
+
+              <button class="btn btn-primary" type="submit">Update Address</button>
+
+
+            </form>
+          </div>
+          {{!-- !--------------------- --}}
+          <div class="wrap-table-shopping-cart col-md-6">
+              {{#each add}}
+                <div style="border: 1px solid rgb(185, 190, 203); border-radius: 10px;" class="box mb-2">
+                    <div class="col-md">
+                          {{!-- <small class="text-light fw-semibold">default</small> --}}
+                       
+                          <div class="form-check mt-1">
+                             <input
+                              name="address"
+                              class="form-check-input"
+                              type="radio"
+                              value={{_id}}
+                              id="defaultRadio1"
+                            />
+                            
+                            <label class="form-check-label" for="defaultRadio1">{{name}}</label>
+<br>
+                          <label class="form-check-label" for="defaultRadio1">{{address}}</label>
+<br>
+                                <label class="form-check-label mb-2 me-1" for="defaultRadio1">{{mobile }}</label>
+
+                                <button style="height: 25px; width: 100px;" class="btn btn-warning"><a style="    font-size: 12px;
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    margin-top: -8px;
+    margin-left: -47px;
+    height: 25px;
+    width: 31px;
+    padding-left: 32px;" href="/editAddress?id={{_id}}">edit</a></button>
+
+                          </div>
+
+
+                          
+                        </div>
+                </div>
+
+                {{/each}}
+
+                
+          </div>
+        </div>
+      </div>
+
+     
+    </div>
+  </div>
+</form>

@@ -1,0 +1,174 @@
+<section style="height: 128vh; background-color: #111927;
+   ">
+    <section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card"  style="border-radius: 1rem;  backdrop-filter: blur(6px) saturate(117%);
+    -webkit-backdrop-filter: blur(6px) saturate(117%);
+    background-color: rgba(17, 25, 40, 0.48);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125); color: #e5e1e1;">
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">welcome to</h2>
+
+              <h3 class="fw-bold mb-2 text-uppercase">APR FASHION WORLD</h3>
+
+              <form action="/register" method="post" id="contactForm" novalidate="novalidate">
+
+              <p class="text-white-50 mb-5"></p>
+
+                <div class="form-outline form-white mb-4">
+                 <span id="nameError" class="text-danger" ></span>
+
+                <input type="text" style="color: #e5e1e1; background: transparent; border:solid #112c43;"  id="typeName" placeholder="Name" onfocus="this.placeholder = '' " onblur="this.placeholder = 'Username'" class="form-control form-control-lg" name="name" required/>
+
+                <label class="form-label" for="typeName">Name</label>
+
+              </div>
+
+
+              <div class="form-outline form-white mb-4">
+                <span id="emailError" class="text-danger" ></span>
+               <input type="email" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="typeEmail" " class="form-control form-control-lg"  placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" name="email"  required />
+                <label class="form-label" for="typeEmail">Email</label>
+                
+              </div>
+               
+      
+                   <div class="form-outline form-white mb-4">
+               <input type="date" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="typeDob" " class="form-control form-control-lg"  placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" name="dob"  required />
+                <label class="form-label" for="typeDob">DOB</label>
+                
+              </div>
+
+
+              <div class="form-outline form-white mb-4">
+
+               <span id="phoneError" class="text-danger" ></span>
+
+                <input type="number" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="typeNumber" class="form-control form-control-lg" name="mobile" required />
+                <label class="form-label" for="typeNumber">Phone No</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                                <span id="passwordError" class="text-danger" ></span>
+
+               <input type="password" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="typePassword" class="form-control form-control-lg" name="password"  required/>
+                <label class="form-label" for="typePassword">Password</label>
+              </div>
+
+               <div class="form-outline form-white mb-4">
+               <span id="passwordErrorC" class="text-danger" > </span>
+               <input type="password" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="typePasswordC"  class="form-control form-control-lg" required />
+               <label class="form-label" for="typePasswordC">Confirm Password</label>
+              </div>
+
+
+              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="/login">Already have an account ?</a></p>
+
+              <button   class="btn btn-outline-light btn-lg px-5" onclick="return validation()"  type="submit"  >Sign up</button>
+              <span id="submitError" class="text-danger"></span>
+              </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+
+
+
+
+
+<script type="text/javascript">
+
+    function validation() {
+      var user = document.getElementById('typeName').value;
+      var email = document.getElementById('typeEmail').value;
+      var mno = document.getElementById('typeNumber').value;
+      var password = document.getElementById('typePassword').value;
+      var password2 = document.getElementById('typePasswordC').value;
+
+
+
+
+      if (user == "") {
+        document.getElementById('nameError').innerHTML =
+          "Please fill the username field";
+        return false;
+      }
+      if ((user.length <= 2) || (user.length > 20)) {
+        document.getElementById('nameError').innerHTML =
+          "User length must be between 3 and 20";
+        return false;
+      }
+      if (!isNaN(user)) {
+        document.getElementById('nameError').innerHTML =
+          "Only characters are allowed";
+        return false;
+      }
+
+
+      if (email == "") {
+        document.getElementById('emailError').innerHTML =
+          "please fill the email field";
+        return false;
+      }
+      if (email.indexOf('@') <= 0) {
+        document.getElementById('emailError').innerHTML =
+          "Invalid '@' position ";              
+        return false;
+      }
+      if ((email.charAt(email.length - 4) != '.') &&
+        (email.charAt(email.length - 3) != '.')) {
+        document.getElementById('emailError').innerHTML =
+          "Invalid '.' position ";
+        return false;
+      }
+
+      if (mno == "") {
+        document.getElementById('phoneError').innerHTML =
+          "please fill the mobile number field";
+        return false;
+      }
+      if (isNaN(mno)) {
+        document.getElementById('phoneError').innerHTML =
+          "Must write digits only not characters";
+        return false;
+      }
+      if (mno.length != 10) {
+        document.getElementById('phoneError').innerHTML =
+          "Must be 10 digits ";
+        return false;
+      }
+
+
+      if (password == "") {
+        document.getElementById('passwordError').innerHTML =
+          "please fill the password field";
+        return false;
+      }
+      if ((password.length < 5) || (password.length > 10)) {
+        document.getElementById('passwordError').innerHTML =
+          "Password length must be between 5 and 10";
+        return false;
+      }
+
+      if (password2 == "") {
+        document.getElementById('passwordErrorC').innerHTML =
+          "please fill the confirm password field";
+        return false;
+      }
+      if (password2 != password) {
+        document.getElementById('passwordErrorC').innerHTML =
+          "Password are not matching";
+        return false;
+      }
+    }
+  </script>

@@ -1,0 +1,35 @@
+<div class="container mt-4 h-100">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 ">
+      <div class="card">
+        <div class="card-body text-center">
+          <i class="bi bi-x-circle-fill text-danger mb-3" style="font-size: 4rem;"></i>
+          <h1 class="card-title">Payment Failed</h1>
+          <p class="card-text">Sorry, your payment could not be processed.</p>
+          <a href="/checkout" class="btn btn-primary mt-3">Try Again</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+    .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  height: 100vh;
+}
+
+.card {  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bi-x-circle-fill {
+  display: block;
+  margin: 0 auto;
+}
+
+</style>

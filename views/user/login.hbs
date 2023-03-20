@@ -1,0 +1,94 @@
+<section style="height: 100vh;   background-color: #111927;
+  
+        radial-gradient(at 47% 33%, rgba(169, 111, 11, 0.485) 0, transparent 59%), 
+        radial-gradient(at 82% 65%, hsl(218.00, 39%, 11%) 0, transparent 55%);">
+
+
+        
+    <section class="vh-100 gradient-custom" style="">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card  text-white" style="border-radius: 1rem;  backdrop-filter: blur(6px) saturate(117%);
+    -webkit-backdrop-filter: blur(6px) saturate(117%);
+    background-color: rgba(120, 142, 184, 0.48);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);">
+          <div class="card-body p-5 text-center">
+          <div class="mb-md-5 mt-md-4 pb-5" > 
+            <form action="/login" method="post" onsubmit="return validate()">
+            <h2 class="fw-bold mb-2 text-uppercase"> </h2>
+            <H2 style="font-weight: bold;">LOGIN</H2>
+        
+              <h6>APR FASHION WORLD</h6>
+              <p class="text-white-50 mb-5">{{message}}</p>
+
+               <div class="form-outline form-white mb-4">
+                <input type="email" name="email" onkeyup="validateEmail()" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="email" class="form-control form-control-lg" />
+                <label class="form-label" for="typeEmailX">Email</label>
+                 
+                 <span id="errEmail" class="text-danger"></span>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+              <input type="password" name="password" onkeyup="validatePass()" style="color: #e5e1e1; background: transparent; border:solid #112c43; " id="password" class="form-control form-control-lg" />
+                <label class="form-label" for="typePassword">Password</label>
+                  <span id="errPass" class="text-danger"></span>
+                
+              </div>
+
+              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="/forgetPassword">Forgot password?</a></p>
+
+              <button class="btn btn-outline-light btn-lg px-5" onclick="validateEmail() , validatePass()" type="submit">Login</button>
+
+            </div>
+
+            <div>
+              <p class="mb-0">Don't have an account? <a href="/register" class="text-white-50 fw-bold">Sign Up</a>
+              </p>
+            </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+
+
+
+<script>
+  function validateEmail() {
+  var email = document.getElementById("email").value;
+  if (/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(email)==false ) {
+    document.getElementById("errEmail").innerHTML ="Please Enter valid Email";
+    return false;
+  }
+  else
+    document.getElementById("errEmail").innerHTML = "";
+    return true;
+}  
+
+
+function validatePass() {
+  var password = document.getElementById("password").value;
+  if (password.length < 3) { 
+    document.getElementById("errPass").innerHTML = "Please Enter More Than 3 Characters";
+    return false;
+  }
+  else{
+    document.getElementById("errPass").innerHTML = "";
+    return true;
+  }
+}
+function validate(){
+   if(validateEmail()&&validatePass()){
+    return true
+    }else{
+      return false
+      }
+}
+
+</script>

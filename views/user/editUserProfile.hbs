@@ -1,0 +1,151 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <!-- Basic Layout -->
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+      <div class="card mb-4">
+
+        <div class="card-body">
+          <form action="/editUser" method="post" >
+          
+          
+
+            <div 
+              
+              class=" d-flex justify-content-between align-items-center"
+            >
+            <div style ="font-size:larger;"> EDIT PROFILE</div>
+            <BR></BR>
+              {{!-- <label for="files" class="btn">Select Image</label> --}}
+              <div>
+
+                {{! <input name="images" id="files" style="visibility:hidden; position: absolute;" type="file"> }}
+               
+              </div>
+
+              <script>
+
+              </script>
+              <h5 class="mb-0">
+                {{! <input
+                name="iages"
+                type="file"
+                id="image"
+                class="form-control phone-mask"
+                placeholder="image"
+                  accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
+              /> }}
+
+                
+
+                <br /></h5>
+
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="basic-default-fullname">
+                Name</label>
+              <input
+                value={{user.name}}
+                type="text"
+                name="name"
+                class="form-control"
+                id="basic-default-fullname"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="basic-default-fullname">
+                Mobile</label>
+              <input
+                disabled
+                type="text"
+                value={{user.mobile}}
+                name="mobile"
+                class="form-control"
+                id="basic-default-fullname"
+              />
+              {{!-- <span class="">
+                <button
+                  type="button"
+                  class="text-primary"
+                  onclick="addInput()"
+                  id="add-btn"
+                >edit</button>
+                <div id="input-container"></div>
+              </span> --}}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="basic-default-fullname">
+                Email</label>
+              <input
+                disabled
+                value={{user.email}}
+                type="email"
+                name="email"
+                class="form-control"
+                id="basic-default-fullname"
+              />
+              {{!-- <span class=""><a href="#">edit</a></span> --}}
+            </div>
+
+            {{! <div class="mb-3">
+              <label class="form-label" for="basic-default-email">Mobile</label>
+              <div class="input-group input-group-merge">
+                <input disabled
+                  name="price"
+                  type="text"
+                  id="basic-default-email"
+                  class="form-control "
+                  placeholder="$500"
+                  aria-label="john.doe"
+                  aria-describedby="basic-default-email2"
+                />
+                
+              </div>
+            </div> }}
+            <div class="mb-3">
+              <label class="form-label" for="basic-default-fullname">
+                Date of Birth</label>
+              <input
+                type="Date"
+                value={{user.dob}}
+                name="dob"
+                class="form-control"
+                id="basic-default-fullname"
+              />
+            </div>
+
+            <button
+              style="margin-left: 150px;"
+              type="submit"
+              class="btn btn-primary justify-content-center"
+            >Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Select the button element const btn = document.querySelector('#add-btn');
+  const input = document.querySelector("#otp") //const addCategoryButton =
+  document.querySelector("button") let catBody = document.querySelector("cat")
+  // Add an event listener to the button function addInput (){ // Make a fetch
+  request to the server endpoint fetch('http://localhost:5000/editMobile')
+  .then(response => response.text()) .then(html => { // Create a new input
+  element with the received HTML code const newInput =
+  document.createElement('div'); newInput.innerHTML = html; // Add the new input
+  element to the DOM const form = document.querySelector('#input-container');
+  form.appendChild(newInput); }) .catch(error => console.error(error)); }
+
+</script>
+
+<script>
+
+  function checkOtp (){ // Make a fetch request to the server endpoint await
+  fetch("http://localhost:5000/checkotp",{ method: "POST", headers:{
+  "Content-Type": "application/json" }, body: JSON.stringify({ otp: input.value
+  , }), }).then((res)=>res.json()) .then((data)=> console.log(data))
+  .catch((err)=>console.log(err.message)) }
+</script>

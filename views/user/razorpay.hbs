@@ -1,0 +1,90 @@
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+ 
+ <section class="h-100">
+ <div class="container mt-4 h-100">
+  <h1 class="text-center mb-4">Order Details</h1>
+  <div class="row mt-3 justify-content-center">
+    <div class="col-sm-12 col-md-6">
+      <p>Order ID: {{orderId}}</p>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <p>Total Price: {{total}}</p>
+    </div>
+  </div>
+  <div class="row mt-3 justify-content-center">
+    <div class="col-12 text-center">
+      <button id="rzp-button" class="btn btn-primary">Pay with Razorpay</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.btn-primary {
+  padding: 10px 30px;
+  font-size: 20px;
+}
+
+@media (max-width: 767.98px) {
+  .btn-primary {
+    font-size: 16px;
+  }
+}
+
+</style>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-7mvKbNpM9XBiRlwujgWVtJg+YenH7a3m3gWdZMzJcKfLdXs+4Qs4lT+TJ/p1n+rkNvS8kTJb6yelz0ovLp6aMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-sgLnwCkH5m5y//Q5FG5ue3h5BzyZ5z5blczVPdwJvzdf+ywMHS25N6vxNk1l9dnN8ceCXYU/Am6Y/E33N/7n6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+      var rzp = new Razorpay({
+        key: "{{key_id}}",
+        amount: {{total}} * 100,
+        currency: "INR",
+        name: "CodeCab",
+        description: "Order #{{orderId}}",
+        image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fcoding-logo&psig=AOvVaw2n3Zrz-JlkCSyPsQSZzZd1&ust=1678875134097000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCLCSgbmX2_0CFQAAAAAdAAAAABAE",
+        order_id: "{{order_id}}",
+        handler: function(response) {
+          // Handle payment succes s
+          console.log(response);
+          //alert("Payment Successful!");
+          window.location.href = "/orderSuccess";
+        },
+        prefill: {
+          name: "{{user.name}}",
+          email: "{{user.email}}"
+        },
+        notes: {
+          address: "{{user.address}}"
+        }
+      });
+
+      rzp.on('payment.failed', function (response){
+        // Handle payment failure
+        console.log(response.error.code);
+        console.log(response.error.description);
+        console.log(response.error.source);
+        console.log(response.error.step);
+        console.log(response.error.reason);
+        console.log(response.error.metadata);
+        //alert("Payment Failed! Please try again.");
+        window.location.href = "/paymentFailure";
+      });
+
+      document.getElementById("rzp-button").onclick = function(e){
+        rzp.open();
+        e.preventDefault();
+      };
+    </script>
+    </section>
+ 
