@@ -77,15 +77,15 @@
 
      
 
-        <form action="/placeOrder" method="post">
-          <div class="wrap-table-shopping-cart col-md-6">
+        <form action="/placeOrder" method="post" >
+          <div class="wrap-table-shopping-cart col-md-6" >
             {{#each add}}
             <div style="border: 1px solid rgb(185, 190, 203); border-radius: 10px;" class="box mb-2">
               <div style="width: 600px;" class="col-md-12">
                 {{!-- <small class="text-light fw-semibold">default</small> --}}
 
                 <div class="form-check mt-1">
-                  <input name="addressId" class="form-check-input" type="radio" value={{_id}} id="defaultRadio1" />
+                  <input name="addressId" class="form-check-input" type="radio" value={{_id}} id="defaultRadio1" checked/>
 
                   <label class="form-check-label" for="defaultRadio1">{{name}}</label>
                   <br>
@@ -139,8 +139,7 @@
 
         <div class="flex-w flex-t bor12 p-b-13">
           <div class="d-flex size-208">
-            <h6 id="err" style="font-size: x-small; color:red;" >
-            </h6>
+            <h6 id="err" style="font-size: x-small; color:red;"></h6>
           </div>
 
           <div class="size-209">
@@ -156,13 +155,13 @@
               Payments:
             </span>
             <div class="form-check mt-1">
-              <input name="payment" class="form-check-input" type="radio" value="cod" id="defaultRadio1" />
+              <input name="payment" class="form-check-input" type="radio" value="cod" id="defaultRadio1" required />
               <label class="form-check-label" for="defaultRadio1">COD('cash on delivery')</label>
 
             </div>
             <div class="form-check mt-1">
               <input name="payment" class="form-check-input" type="radio" value="card" id="defaultRadio1" />
-              <label class="form-check-label" for="defaultRadio1">Debit/Credit</label>
+              <label class="form-check-label" for="defaultRadio1">Razorpay</label>
 
             </div>
             {{!-- <div class="form-check mt-1">
@@ -363,7 +362,7 @@
 
                    console.log(gTotal)
                    }else{
-                    document.getElementById('err').innerHTML='*invalid coupon'
+                    document.getElementById('err').innerHTML=data.message;
                     console.log(data.message)
                    }
                  

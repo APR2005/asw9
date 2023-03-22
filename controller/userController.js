@@ -738,7 +738,7 @@ const cancelOrder = async (req, res) => {
     console.log("1");
 
     const orderData = await orderModel.findById(req.query.id);
-    const productData = await productModel.find();
+    const productData = await produtModel.find();
 
     // Retrieve the order details and populate the product field with the corresponding product documen
 
@@ -931,17 +931,16 @@ const addCouponValue = async (req, res) => {
             console.log("fol" + fol);
             res.send({ disc, state: 1, fol, jol });
           } else {
-            message = "cannot apply";
-            res.send({ message, state: 0 });
+            res.send({ message : "Cannot Apply Coupon", state: 0 });
           }
         }
       } else {
-        message = "coupon Expired";
-        res.send({ message, state: 0 });
+        
+        res.send({ message:"coupon Expired", state: 0 });
       }
     } else {
-      message = "coupon not found";
-      res.send({ message, state: 0 });
+      
+      res.send({ message :"coupon not found", state: 0 });
     }
   } catch (error) {
     console.log(error);
