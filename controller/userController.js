@@ -17,6 +17,7 @@ const offermodel = require("../model/offermodel");
 const moment = require("moment");
 const categoryModel = require("../model/categoryModel");
 const { trusted } = require("mongoose");
+const session = require("express-session");
 require('dotenv').config()
 
 let newUser;
@@ -63,8 +64,12 @@ const loadRegister = (req, res) => {
 
 const loadCart = async (req, res) => {
   try {
-    const login = false;
+    console.log('1');
     userSession = req.session;
+    console.log(userSession.user_id);
+    if(userSession.user_id){
+    // const login = false;
+  
     const userData = await userSchema.findById({ _id: userSession.user_id });
     console.log(userData);
     console.log(userSession.user_id);
@@ -73,10 +78,15 @@ const loadCart = async (req, res) => {
     console.log(completeUser.cart.totalPrice);
 
     res.render("cart", {
+      userSession,
       user: userData,
       cartProducts: completeUser.cart,
       session: req.session.user_id,
     });
+  }
+   else{
+     res.render('login')
+   }
   } catch (error) {
     console.log(error);
   }

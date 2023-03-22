@@ -14,14 +14,19 @@ const isLogin = (req, res, next) => {
 
 const isLogout = async (req, res, next) => {
   try {
+    if(req.session.user_id){
 const userdata = await userModel.findById({_id:req.session.user_id})
 
-    if (req.session.user_id && userdata.isAvailable) {
+    if (userdata.isAvailable) {
     
       next();
     } else {
       res.render("login",{login:true,});
     }
+  }
+  else{
+    res.render("login",{login:true,});
+  }
   } catch (error) {
     console.log(error.message);
   }

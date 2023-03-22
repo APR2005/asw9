@@ -54,12 +54,12 @@ route.get("/productDetails", userController.loadProductDetails);
 
 route.get("/checkout", userAuth.isLogout, userController.loadCheckout);
 
-route.get("/orderSuccess", userController.loadOrderSuccess);
+route.get("/orderSuccess",userAuth.isLogout,userController.loadOrderSuccess);
 
 route.get('/loadOrderSuccess',userAuth.isLogout,userController.loadOrderSuccess)
 
 
-route.post('/placeOrder',userController.placeOrder)
+route.post('/placeOrder',userAuth.isLogout,userController.placeOrder)
 
 route.get("/addToCart", userAuth.isLogout, userController.addToCart);
 
@@ -85,17 +85,17 @@ route.get("/deleteAddress", userController.deleteAddress);
 // route.get("/deleteAddress1", userController.deleteAddressPRofile);
 
 
-route.get("/addToWishlist", userController.addToWishlist);
+route.get("/addToWishlist",userAuth.isLogout, userController.addToWishlist);
 
-route.get("/deleteWishlist", userController.deleteWishlist);
+route.get("/deleteWishlist",userAuth.isLogout, userController.deleteWishlist);
 
-route.get("/userProfile", userController.loadUserProfile);
+route.get("/userProfile",userAuth.isLogout, userController.loadUserProfile);
 
-route.get("/wishlist", userController.loadWishlist);
+route.get("/wishlist",userAuth.isLogout, userController.loadWishlist);
 
-route.get("/userProfile", userController.loadUserProfile);
+route.get("/userProfile",userAuth.isLogout, userController.loadUserProfile);
 
-route.get("/otp", userController.loadOtp);
+route.get("/otp",userAuth.isLogout, userController.loadOtp);
 
 route.get("/orderDetails",userAuth.isLogout, userController.loadOrderDetails);
 
