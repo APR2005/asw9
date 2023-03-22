@@ -68,7 +68,7 @@ route.get("/deleteCart", userController.deleteCart);
 route.get("/resetPassword", userController.loadForgetPassword);
 
 
-route.get("/forgetPassword",userAuth.isLogin, userController.loadForgetPassword);
+route.get("/forgetPassword", userController.loadForgetPassword);
 
 route.get("/orderSummary", userController.loadOrderSummary);
 

@@ -18,10 +18,11 @@
               
 
                 <span>{{message}}</span>
-                <input type="text" name="otp" placeholder="Otp" />
-                <input type="hidden" value={{newOtp}} name="newotp">
-              <input type="hidden" name="id" value={{userData._id}}>
-                <button type="submit">Verify Otp</button>
+                <input id="err" type="text" name="otp" placeholder="Otp" />
+                <input id="err" type="hidden" value={{newOtp}} name="newotp">
+              <input id="err" type="hidden" name="id" value={{userData._id}}>
+
+                <button type="submit" onclick="return validate()" >Verify Otp</button>
             </form>
         </div>
         
@@ -258,3 +259,25 @@ button.ghost {
     transform: translateX(20%);
 }
 </style>
+
+
+<script type="text/javascript">
+function validate(){
+    var mobile = document.getElementById('err').value
+
+
+      if (mobile =="") {
+        document.getElementById('phoneError').innerHTML =
+          "Please fill this field";
+        return false;
+      }
+
+    
+      if (mobile.length != 3) {
+        document.getElementById('phoneError').innerHTML =
+          "Must be 4 digits ";
+        return false;
+      }
+}
+
+</script>
