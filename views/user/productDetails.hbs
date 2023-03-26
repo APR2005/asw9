@@ -64,43 +64,7 @@
           <!--  -->
           <div class="p-t-33">
             <div class="flex-w flex-r-m p-b-10">
-              <div class="size-203 flex-c-m respon6">
-                Size
-              </div>
-
-              <div class="size-204 respon6-next">
-                <div class="rs1-select2 bor8 bg0">
-                  <select class="js-select2" name="time">
-                    <option>Choose an option</option>
-                    <option>Size S</option>
-                    <option>Size M</option>
-                    <option>Size L</option>
-                    <option>Size XL</option>
-                  </select>
-                  <div class="dropDownSelect2"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex-w flex-r-m p-b-10">
-              <div class="size-203 flex-c-m respon6">
-                Color
-              </div>
-
-              <div class="size-204 respon6-next">
-                <div class="rs1-select2 bor8 bg0">
-                  <select class="js-select2" name="time">
-                    <option>Choose an option</option>
-                    <option>Red</option>
-                    <option>Blue</option>
-                    <option>White</option>
-                    <option>Grey</option>
-                  </select>
-                  <div class="dropDownSelect2"></div>
-                </div>
-              </div>
-            </div>
-
+<p id="err" class="text-center mb-0 text-success"> </p>      
             <div class="flex-w flex-r-m p-b-10">
               <div class="size-204 flex-w flex-m respon6-next">
                 <div class="wrap-num-product flex-w m-r-20 m-tb-10">
@@ -114,6 +78,7 @@
                     class="mtext-104 cl3 txt-center num-product"
                     type="number"
                     name="num-product"
+                    id="num-product"
                     value="1"
                   />
 
@@ -127,8 +92,7 @@
                 <button
                   class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
                 >
-                  <a href="/addToCart?id={{product._id}}">Add to cart</a>
-
+                <a href="#" id="add-to-cart">Add to cart</a>
                 </button>
               </div>
             </div>
@@ -815,3 +779,43 @@
     </div>
   </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="sweetalert2.all.min.js"></script>
+
+               <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#add-to-cart').click(function(e) {
+      e.preventDefault();
+      var productId = '{{product._id}}';
+      var qty = $('#num-product').val();
+      $.ajax({
+        url: '/addToCart',
+        type: 'POST',
+        data: {productId: productId, qty: qty},
+        success: function(response) {
+          console.log(response);
+          document.getElementById('err').innerHTML = qty+' Item(s) Added to Cart Successfully...!'
+          if(response){
+            console.log("GFdgfdf1")
+            Swal.fire({
+        icon: 'success',
+        title: 'Added to Cart',
+        showConfirmButton: false,
+        timer: 800,
+            })
+          }
+          setTimeout(()=>{
+          document.getElementById('err').innerHTML = ''
+          },2500)
+          
+        },
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
+    });
+  });
+</script>

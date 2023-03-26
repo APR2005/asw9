@@ -240,22 +240,55 @@
             <th>Sl no</th>
             <th>catagory Name</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          {{#each category}}
-            <tr>
-              <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                <strong>{{inc @index}}</strong></td>
-              <td>{{name}}</td>
+{{#each category}}
+  <tr>
+    <td><i class="fab fa-angular fa-lg text-danger me-3"></i><strong>{{inc @index}}</strong></td>
+    <td>{{name}}</td>
+    <td>
+      <button class="btn btn-danger">
+        <a style="text-decoration: none;color:rgb(255, 255, 255);" href="/admin/delteCategory?id={{_id}}">Delete</a>
+      </button>
+    </td>
+    <td>
+      <div class="mt-3">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter{{_id}}">EDIT</button>
+        <!-- Modal -->
+        <form action="/admin/editCategory" method="post">
+          <div class="modal fade" id="modalCenter{{_id}}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <input type="hidden" value="{{_id}}" name="editCategory">
+                  <h5 class="modal-title" id="modalCenterTitle{{_id}}">Add</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameWithTitle{{_id}}" class="form-label">ENTER CATEGORY NAME</label>
+                      <input type="text" name="name" value="{{name}}" id="nameWithTitle{{_id}}" class="form-control" placeholder="">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">SAVE</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <br>
+    </td>
+  </tr>
+{{/each}}
 
-              <td><button class="btn btn-danger"><a
-                    style="text-decoration: none;color:rgb(255, 255, 255) ;"
-                    href="/admin/delteCategory?id={{_id}}"
-                  >Delete</a></button></td>
-
-            </tr>
-          {{/each}}
         </tbody>
       </table>
     </div>
@@ -277,5 +310,10 @@
       }
          }
 
+
+
+         
+
   </script>
+
 

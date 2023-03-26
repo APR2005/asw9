@@ -15,6 +15,7 @@ const nocache = require("nocache");
 // ! sms
 
 const sms = require("fast2sms");
+const userModel = require("../model/userModel");
 const otp = Math.floor(1000 + Math.random() * 9000);
 // !================================================
 
@@ -61,7 +62,7 @@ route.get('/loadOrderSuccess',userAuth.isLogout,userController.loadOrderSuccess)
 
 route.post('/placeOrder',userAuth.isLogout,userController.placeOrder)
 
-route.get("/addToCart", userAuth.isLogout, userController.addToCart);
+route.post("/addToCart", userAuth.isLogout, userController.addToCart); 
 
 route.get("/deleteCart", userController.deleteCart);
 

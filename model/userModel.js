@@ -63,13 +63,19 @@ const userSchema = new mongoose.Schema({
         },
         price: {
           type: Number,
+          default :0
         },
+        qty:{
+          type:Number,
+          default:1
+        }
+        
       },
     ],
   },
 });
 
-userSchema.methods.addToCart = function (product) {
+userSchema.methods.addToCart = function (product,qty) {
   const cart = this.cart
   console.log("cart is="+cart);
   const isExisting = cart.item.findIndex((objInItems) => {
@@ -79,17 +85,32 @@ userSchema.methods.addToCart = function (product) {
   })
   console.log("isExisting is="+isExisting); //-1
   if (isExisting >= 0) {
-      cart.item[isExisting].qty += 1
+    console.log('qty');
+      cart.item[isExisting].qty += qty
+      cart.totalPrice += product.price*cart.item[isExisting].qty
   } else {
-      cart.item.push({ productId: product._id, productName:product.name, qty: 1, price: product.price })
-  }
-  cart.totalPrice += Number(product.price);
+    if(!qty)
+    {
+
+      cart.item.push({ productId: product._id,qty:1, price: product.price })
+      cart.totalPrice += product.price * 1
+      console.log(product.price);
+      
+    }else{
+      cart.item.push({ productId: product._id, qty:qty, price: product.price })
+      cart.totalPrice += product.price * qty
+      console.log(product.price);
+      console.log(qty);
+    }
+      
+  }console.log('sshgd ja');
+  
   console.log('User in schema:', this)
   return this.save()
 }
 
 userSchema.methods.removefromCart = async function (productId) {
-  let a ;
+  
   const cart = this.cart
   const isExisting = cart.item.findIndex(
     (objInItems) =>
@@ -117,7 +138,8 @@ userSchema.methods.addToWishlist = function (product) {
   } else {
     wishlist.item.push({
       productId: product._id,
-      // price: product,
+       price: product.price,
+       qty:1
     });
   }
   return this.save();

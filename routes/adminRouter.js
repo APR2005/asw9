@@ -119,6 +119,11 @@ router.post("/update", multer.upload.array("images"), adminController.editProduc
 
 router.post('/addBanner',multer.upload.array('bannerImage'),adminController.addBanner)
 
+router.post('/editCategory',adminController.editCategorty)
+
+router.post('/EditofferStore',adminController.editOffer)
+
+
 router.get('*',(req,res)=>res.render('404'))
 
 

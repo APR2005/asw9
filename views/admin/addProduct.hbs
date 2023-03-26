@@ -187,8 +187,7 @@
 <!-- Content -->
 
 <div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span>
-    Vertical Layouts</h4>
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span></h4>
 
   <!-- Basic Layout -->
   <div class="row">
@@ -197,116 +196,114 @@
         <div
           class="card-header d-flex justify-content-between align-items-center"
         >
-          <h5 class="mb-0">Basic Layout</h5>
+          <h5 class="mb-0">ADD PRODUCT</h5>
           {{! <button><a href="admin/category">Category</a></button> }}
         </div>
         <div class="card-body">
           <form
-            action="/admin/addProducts"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <div class="mb-3">
-              <label class="form-label" for="basic-default-fullname">Product
-                Name</label>
-              <input
-                type="text"
-                name="product"
-                class="form-control"
-                id="basic-default-fullname"
-                placeholder="iphone...."
-              />
-            </div>
-            {{! <div class="mb-3">
-              <label
-                class="form-label"
-                for="basic-default-company"
-              >Category</label>
-              <input
-                type="text"
-                name="category"
-                class="form-control"
-                id="basic-default-company"
-                placeholder="Mobile..."
-              />
-            </div> }}
-            <div class="mb-3">
-              <label for="defaultSelect" class="form-label">Category</label>
-              <select name="category" id="defaultSelect" class="form-select">
-                {{#each category}}
-                  <option value={{name}}>{{name}}</option>
-                {{/each}}
+  action="/admin/addProducts"
+  method="post"
+  enctype="multipart/form-data"
+  id="myForm"
+>
+  <div class="mb-3">
+    <label class="form-label" for="basic-default-fullname"
+      >Product Name</label
+    >
+    <span id="nameError" class="text-danger"></span>
+    <input
+      type="text"
+      name="product"
+      class="form-control"
+      id="name"
+      placeholder="iphone...."
+       onkeyup="validateName()"
+       required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="defaultSelect" class="form-label">Category</label>
+    <select name="category" id="defaultSelect" class="form-select">
+      {{#each category}}
+      <option value={{_id}}>{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="basic-default-email">Price</label>
+        <span id="priceError" class="text-danger"></span>
 
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="basic-default-email">Price</label>
-              <div class="input-group input-group-merge">
-                <input
-                  name="price"
-                  type="text"
-                  id="basic-default-email"
-                  class="form-control"
-                  placeholder="$500"
-                  aria-label="john.doe"
-                  aria-describedby="basic-default-email2"
-                />
-              </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="basic-default-phone">Image</label>
-              <input
-                name="images"
-                type="file"
-                id="basic-default-phone"
-                onchange=" return readURL()"
-                class="form-control phone-mask"
-                  accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
-                placeholder="image"
-              />
-              <br>
-              <input
-                name="images"
-                type="file"
-                id="image"
-                class="form-control phone-mask"
-                placeholder="image"
-                  accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
-              />
-              <br>
-              <input
-                name="images"
-                type="file"
-                id="image"
-                class="form-control phone-mask"
-                placeholder="image"
-                  accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
-              />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="basic-default-phone">Quantity</label>
-              <input
-                name="qty"
-                type="text"
-                id="basic-default-phone"
-                class="form-control phone-mask"
-                placeholder="quantity"
-              />
-            </div>
-            <div class="mb-3">
-              <label
-                class="form-label"
-                for="basic-default-message"
-              >Description</label>
-              <textarea
-                name="description"
-                id="basic-default-message"
-                class="form-control"
-                placeholder="The Best iphone Ever Made.........."
-              ></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Add Product</button>
-          </form>
+    <div class="input-group input-group-merge">
+      <input
+        name="price"
+        type="text"
+        id="price"
+        class="form-control"
+        placeholder="$500"
+        aria-label="john.doe"
+        aria-describedby="basic-default-email2"
+        required
+      />
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="basic-default-phone">Image</label>
+    <input
+      name="images"
+      type="file"
+      id="basic-default-phone"
+      onchange="return readURL()"
+      class="form-control phone-mask"
+      accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
+      placeholder="image"
+    />
+    <br />
+    <input
+      name="images"
+      type="file"
+      id="image"
+      class="form-control phone-mask"
+      placeholder="image"
+      accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
+    />
+    <br />
+    <input
+      name="images"
+      type="file"
+      id="image"
+      class="form-control phone-mask"
+      placeholder="image"
+      accept="image/png, image/gif, image/jpeg, image/jpg ,image/webp"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="basic-default-phone">Quantity</label>
+            <span id="qtyError" class="text-danger"></span>
+
+    <input
+      name="qty"
+      type="text"
+      id="quantity"
+      class="form-control phone-mask"
+      placeholder="quantity"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label
+      class="form-label"
+      for="basic-default-message"
+      >Description</label
+    >
+    <textarea
+      name="description"
+      id="description"
+      class="form-control"
+      placeholder="The Best iphone Ever Made.........."
+    ></textarea>
+  </div>
+  <button type="submit" id="submitBtn" class="btn btn-primary">Add Product</button>
+</form>
         </div>
       </div>
     </div>
@@ -314,4 +311,98 @@
 </div>
 <!-- / Content -->
 
-<script defer src="https://cdn.crop.guide/loader/l.js?c=NTWPQH"></script>
+<script defer src="https://cdn.crop.guide/loader/l.js?c=ZLPLTT"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="sweetalert2.all.min.js"></script>
+
+ 
+
+ <script>
+
+ 
+
+  function validateName() {
+  const nameInput = document.getElementById("name");
+  const nameError = document.getElementById("nameError");
+  const nameRegex = /^[a-zA-Z]+$/;
+  const name = nameInput.value.trim();
+  if (!nameRegex.test(name)) {
+    nameInput.classList.add("is-invalid");
+    nameInput.classList.remove("is-valid");
+    nameError.textContent = "Product name can only contain alphabets!";
+    return false;
+  } else {
+    nameInput.classList.add("is-valid");
+    nameInput.classList.remove("is-invalid");
+    nameError.textContent = "";
+    return true;
+  }
+}
+
+
+
+const priceInput = document.querySelector('#price');
+const priceError = document.querySelector('#priceError');
+
+priceInput.addEventListener('keyup', function() {
+  const regex = /^\$?\d+(\.\d{1,2})?$/; // regular expression to match currency format with up to 2 decimal places
+  const isValid = regex.test(priceInput.value);
+
+  if (!isValid) {
+    priceInput.classList.add('is-invalid');
+    priceError.textContent = 'Please enter a valid price.';
+  } else {
+    priceInput.classList.remove('is-invalid');
+    priceError.textContent = '';
+  }
+});
+
+const qtyInput = document.querySelector('#quantity');
+const qtyError = document.querySelector('#qtyError');
+
+qtyInput.addEventListener('keyup', function() {
+  const regex = /^\d+$/; // regular expression to match only digits
+  const isValid = regex.test(qtyInput.value);
+
+  if (!isValid) {
+    qtyInput.classList.add('is-invalid');
+    qtyError.textContent = 'Please enter only digits.';
+  } else {
+    qtyInput.classList.remove('is-invalid');
+    qtyError.textContent = '';
+  }
+});
+
+const form = document.getElementById('myForm');
+const submitBtn = document.getElementById('submitBtn');
+
+submitBtn.addEventListener('click', function(e) {
+  // Prevent the form from submitting if validation fails
+  e.preventDefault();
+
+  // Check if all fields are filled out
+  if (form.checkValidity()) {
+    // Submit the form
+    form.submit();
+  } else {
+      Swal.fire({
+        
+       icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill all fields.',
+            })
+          }
+          setTimeout(()=>{
+          document.getElementById('err').innerHTML = ''
+          },2500)
+  
+});
+
+
+
+  
+</script>
+
+

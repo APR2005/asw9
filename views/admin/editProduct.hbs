@@ -1,5 +1,5 @@
 
-<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+   <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="/admin/dashboard" class="app-brand-link">
               <span class="app-brand-logo demo">
@@ -57,7 +57,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">asw</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">ASW</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -69,43 +69,57 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item">
+            <li class="menu-item ">
               <a href="/admin/dashboard" class="menu-link">
-                <i class="menu-icon -icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item ">
+            <li class="menu-item active ">
               <a href="/admin/products" class="menu-link">
               <i class="menu-icon bi bi-box2"></i>
                 <div data-i18n="Analytics">Products</div>
               </a>
             </li>
-
-               <li class="menu-item ">
-              <a href="/admin/orders" class="menu-link">
-              <i class="menu-icon bi bi-box2"></i>
-                <div data-i18n="Analytics">Orders</div>
-              </a>
-            </li>
-
-            <li class="menu-item">
+             <li class="menu-item">
       <a href="/admin/category" class="menu-link">
         <i class="menu-icon bi bi-card-list"></i>
         <div data-i18n="Analytics">Category</div>
       </a>
     </li>
-             <li class="menu-item active ">
+    
+             <li class="menu-item ">
               <a href="/admin/addProducts" class="menu-link">
-             <i class=" menu-icon bi bi-plus-square-dotted"></i>
+            <i class=" menu-icon bi bi-plus-square-dotted"></i>
                 <div data-i18n="Analytics">Add Products</div>
               </a>
             </li>
+
+
+            <li class="menu-item ">
+  <a href="/admin/loadbanner" class="menu-link">
+    <i class="menu-icon tf-icons bx bxl-kubernetes"></i>
+    <div data-i18n="Analytics">Banner</div>
+  </a>
+</li>
             <li class="menu-item ">
               <a href="/admin/users" class="menu-link">
                 {{!-- <i class="menu-icon tf-icons bx bx-people"></i> --}}
                 <i class="menu-icon tf-icons bx bi bi-people"></i>
                 <div data-i18n="Analytics">Users</div>
+              </a>
+            </li>
+            <li class="menu-item">
+      <a href="/admin/offerStore" class="menu-link">
+        <i class="menu-icon bi bi-card-list"></i>
+        <div data-i18n="Analytics">offerStore</div>
+      </a>
+    </li>
+             <li class="menu-item ">
+              <a href="/admin/order" class="menu-link">
+                {{!-- <i class="menu-icon tf-icons bx bx-people"></i> --}}
+                <i class="menu-icon tf-icons bx bi bi-people"></i>
+                <div data-i18n="Analytics">Order Details</div>
               </a>
             </li>
 
@@ -115,14 +129,46 @@
               <div data-i18n="Analytics">Sales Report</div>
             </a>
           </li>
-          
- <!-- Layouts -->
+
+            <!-- Layouts -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 {{!-- <i class="menu-icon tf-icons bx bx-layout"></i> --}}
-                <i class="menu-icon bi bi-person-vcard"></i>
+                                <i class="menu-icon bi bi-person-vcard"></i>
+
                 <div data-i18n="Layouts">Account</div>
               </a>
+
+                <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div data-i18n="Without menu">My Profile</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-without-navbar.html" class="menu-link">
+                    <div data-i18n="Without navbar">Settings</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-container.html" class="menu-link">
+                    <div data-i18n="Container">Billing</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/admin/logout" class="menu-link">
+                    {{!-- <i class=" menu-icon bi bi-box-arrow-left"></i> --}}
+                    <div data-i18n="Fluid">Logout</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+          
+ <!-- Layouts -->
+            <li class="menu-item">
+             
 
                 <ul class="menu-sub">
                 <li class="menu-item">
@@ -160,32 +206,50 @@
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0"></h5>
-                      <small class="text-muted float-end">{{product._id}}</small>
+                      <small class="text-muted float-end" hidden>{{product._id}}</small>
                     </div>
                     <div class="card-body">
-                      <form action="/admin/update" method="post" enctype="multipart/form-data" >
+                      <form action="/admin/update" method="post" id="myForm"   enctype="multipart/form-data" >
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-fullname">Product Name</label>
-                          <input type="text" name="name" value="{{product.name}}" class="form-control" id="basic-default-fullname" placeholder="iphone...." />
+                              <span id="nameError" class="text-danger"></span>
+
+                          <input type="text" name="name" value="{{product.name}}" class="form-control" id="name" placeholder="iphone...." onkeyup="validateName()" />
                         </div>
-                        <div class="mb-3">
+
+                           <div class="mb-3">
                           <label class="form-label" for="basic-default-company">Category</label>
-                          <input type="text" value="{{product.category}}" name="category" class="form-control" id="basic-default-company" placeholder="Mobile..." />
+                          <select name="category"  id="defaultSelect" class="form-select">
+                        {{#each category}}
+                          <option  value={{_id}}>{{name}}</option>
+                        {{/each}}
+                         
+                        </select>
+                        </div>
+                        
+                          <div class="mb-3">
+                          <label class="form-label" for="basic-default-company">Quantity</label>
+                                                        <span id="qtyError" class="text-danger"></span>
+
+                          <input type="Number" value="{{product.quantity}}" name="quantity" class="form-control" id="quantity" placeholder="Mobile..." />
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-email">Price</label>
+                                                                                  <span id="priceError" class="text-danger"></span>
+
                           <div class="input-group input-group-merge">
                             <input
                             value="{{product.price}}"
                             name="price"
                               type="text"
-                              id="basic-default-email"
+                              id="price"
                               class="form-control"
                               placeholder="$500"
                               aria-label="john.doe"
                               aria-describedby="basic-default-email2"
                             />
                           </div>
+                          
                            <div class="input-group input-group-merge">
                             <input
                             value="{{product._id}}"
@@ -237,7 +301,7 @@
                           ></input>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update Product</button>
+                        <button type="submit" class="btn btn-primary"  id="submitBtne" >Update Product</button>
                       </form>
                     </div>
                   </div>
@@ -246,4 +310,96 @@
             </div>
             <!-- / Content -->
 
-<script defer src="https://cdn.crop.guide/loader/l.js?c=NTWPQH"></script>
+<script defer src="https://cdn.crop.guide/loader/l.js?c=ZLPLTT"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="sweetalert2.all.min.js"></script>
+
+ 
+
+ <script>
+
+ 
+
+  function validateName() {
+  const nameInput = document.getElementById("name");
+  const nameError = document.getElementById("nameError");
+  const nameRegex = /^[a-zA-Z]+$/;
+  const name = nameInput.value.trim();
+  if (!nameRegex.test(name)) {
+    nameInput.classList.add("is-invalid");
+    nameInput.classList.remove("is-valid");
+    nameError.textContent = "Product name can only contain alphabets!";
+    return false;
+  } else {
+    nameInput.classList.add("is-valid");
+    nameInput.classList.remove("is-invalid");
+    nameError.textContent = "";
+    return true;
+  }
+}
+
+
+
+const priceInput = document.querySelector('#price');
+const priceError = document.querySelector('#priceError');
+
+priceInput.addEventListener('keyup', function() {
+  const regex = /^\$?\d+(\.\d{1,2})?$/; // regular expression to match currency format with up to 2 decimal places
+  const isValid = regex.test(priceInput.value);
+
+  if (!isValid) {
+    priceInput.classList.add('is-invalid');
+    priceError.textContent = 'Please enter a valid price.';
+  } else {
+    priceInput.classList.remove('is-invalid');
+    priceError.textContent = '';
+  }
+});
+
+const qtyInput = document.querySelector('#quantity');
+const qtyError = document.querySelector('#qtyError');
+
+qtyInput.addEventListener('keyup', function() {
+  const regex = /^\d+$/; // regular expression to match only digits
+  const isValid = regex.test(qtyInput.value);
+
+  if (!isValid) {
+    qtyInput.classList.add('is-invalid');
+    qtyError.textContent = 'Please enter only digits.';
+  } else {
+    qtyInput.classList.remove('is-invalid');
+    qtyError.textContent = '';
+  }
+});
+
+
+const form = document.getElementById('myForm');
+const submitBtn = document.getElementById('submitBtne');
+
+submitBtn.addEventListener('click', function(e) {
+  // Prevent the form from submitting if validation fails
+  e.preventDefault();
+
+  // Check if all fields are filled out
+  if (form.checkValidity()) {
+    // Submit the form
+    form.submit();
+  } else {
+      Swal.fire({
+        
+       icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill all fields.',
+            })
+          }
+          setTimeout(()=>{
+          document.getElementById('err').innerHTML = ''
+          },2500)
+  
+});
+
+
+
+  
+</script>

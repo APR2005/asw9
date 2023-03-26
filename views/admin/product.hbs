@@ -178,11 +178,11 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span></h4>
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
-                <h5 class="card-header">Table Basic</h5>
+                <h5 class="card-header">PRODUCTS</h5>
                 <div class="table-responsive text-nowrap">
                   <table class="table">
                     <thead>
@@ -249,7 +249,7 @@
                             </td>
                         {{/if}}
 
-                        <td>{{category}}</td>
+                        <td>{{category.name}}</td>
 
                         <td><button class="btn btn-warning"><a style="text-decoration: none; color: #ffff;" href="/admin/editProduct?id={{_id}}">Edit</a></button></td>
 

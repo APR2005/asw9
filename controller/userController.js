@@ -24,7 +24,7 @@ let newUser;
 let findCatagory;
 
 let order;
-
+let jol
 const login = false;
 let offer = {
   name: "None",
@@ -94,14 +94,16 @@ const loadCart = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    const productId = req.query.id;
+    const productId = req.body.productId;
+    const qty = parseInt(req.body.qty)
+    console.log(qty);
     userSession = req.session;
     const userData = await userSchema.findById({ _id: userSession.user_id });
     const productData = await produtModel.findById({ _id: productId });
     console.log(productData);
-    userData.addToCart(productData);
-    res.redirect("/shop");
-  } catch (error) {
+    userData.addToCart(productData,qty);
+    res.send({msg:'Added to Cart'});
+  } catch (error) { 
     console.log(error.message);
   }
 };
@@ -188,11 +190,13 @@ loadWishlist = async (req, res) => {
 
 const addCartDeleteWishlist = async (req, res) => {
   try {
+    console.log("1");
     userSession = req.session;
     const productId = req.query.id;
     const userData = await userSchema.findById({ _id: userSession.user_id });
     const productData = await produtModel.findById({ _id: productId });
     const add = await userData.addToCart(productData);
+    
     if (add) {
       await userData.removefromWishlist(productId);
     }
@@ -214,6 +218,8 @@ const deleteWishlist = async (req, res) => {
   }
 };
 
+
+
 const loadShop = async (req, res) => {
   try {
     // console.log("hi1");
@@ -224,8 +230,9 @@ const loadShop = async (req, res) => {
     const data = await categoryModel.findOne({ _id: ID });
     const product = await produtModel.find();
     let Catagory = req.query.catagory;
+    console.log("catagory:"+Catagory);
     let catagoryFind = await produtModel.find({ category: Catagory });
-    // console.log("catagoryFind:"+catagoryFind);
+    console.log("catagoryFind:"+catagoryFind);
 
     if (Catagory == "all") {
       findCatagory = product;
@@ -234,10 +241,10 @@ const loadShop = async (req, res) => {
     }
 
     if (!Catagory) {
-      res.render("shop", { session, product, login });
+      res.render("shop", { session, product, login,categorydata:categorydata });
     } else {
       // res.json(findCatagory)
-      res.render("shop", { session, product: findCatagory, login });
+      res.render("shop", { session, product: findCatagory, login,categorydata:categorydata });
     }
   } catch {
     console.log(error);
@@ -590,7 +597,7 @@ const placeOrder = async (req, res) => {
       .findById({ _id: userSession.user_id })
       .populate("cart.item.productId");
   
-    let  totalPrice = userData.cart.totalPrice;
+    let  totalPrice = userData.cart.totalPrice -jol
 
       console.log("address", address);
 
@@ -706,8 +713,8 @@ const loadOrderSuccess = async (req, res) => {
     
       const productDetails = await produtModel.find({ is_available: true});
       for (let i = 0; i < productDetails.length; i++) {
-        for (let j = 0; j < order.products.item.length; j++) {
-          if (
+       for (let j = 0; j < order.products.item.length; j++) {
+         if (
             productDetails[i]._id.equals(order.products.item[j].productId)
           ) {
             productDetails[i].sales += order.products.item[j].qty;
@@ -715,7 +722,6 @@ const loadOrderSuccess = async (req, res) => {
         }
         productDetails[i].save();
       }
-
       res.render("orderSuccess", { session: req.session.user_id });
     }
   } catch (error) {}
@@ -802,11 +808,13 @@ const viewOrders = async (req, res) => {
     console.log(req.query.id);
     const userData = await userSchema.findById({ _id: userSession.user_id });
 
-    const completeData = await order.populate("products.item.productId");
+    const completeData = await (await order.populate("products.item.productId")).populate('products.item.productId.category')
+    console.log('1');
+    const Data = completeData.products.item
     console.log(order);
     console.log();
     res.render("orderDetails", {
-      order: completeData.products.item,
+      order: Data,
       user: userData,
       orders: order,
     });

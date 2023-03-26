@@ -8,6 +8,11 @@
             <div class="card-header px-4 py-5">
            
               <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #336af7;">{{user.name}}</span>!</h5>
+              
+                                  {{#if (eq orders.status "Delivered")}}
+               <h4 style="color: green;"> DELIVERED SUCCESSFULLY!</h4>
+               {{/if}}
+
             </div>
             <div class="card-body p-4">
               <div class="d-flex justify-content-between align-items-center mb-4">
@@ -36,7 +41,7 @@
                       <p class="text-muted mb-0 small">Platform:<%=order.products.item[i].productId.platform %></p>
                     </div> -->
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">{{productId.category}}</p>
+                      <p class="text-muted mb-0 small">{{productId.category.name}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                       <p class="text-muted mb-0 small">{{qty}}</p>
@@ -51,6 +56,7 @@
                     {{#if (eq orders.status "Delivered")}}
                     
                     <div class="text-center d-flex" style="margin-left: 35vw;">
+
                       <a href="/returnOrder?id={{orders._id}}" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Return Product</a>
                     </div>
                         {{else if (eq orders.status "Confirm")}}
@@ -133,7 +139,7 @@
             <div  class="card-footer border-0 px-4 py-5"
               style="background-color: #336af7; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; margin-top:30px">
               <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
-                paid: <span class="h2 mb-0 ms-2">₹{{orders.products.totalPrice}}</span></h5>
+                paid: <span class="h2 mb-0 ms-2">₹{{orders.price}}</span></h5>
             </div>
           </div>
          
