@@ -611,7 +611,7 @@ const placeOrder = async (req, res) => {
           zip: address.zip,
           mobile: address.mobile,
           products: userData.cart,
-          prices : totalPrice
+          price : totalPrice
         });
         console.log(order);
 

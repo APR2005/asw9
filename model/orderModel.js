@@ -77,7 +77,7 @@ const orderSchema = new mongoose.Schema({
     default: "Attempted"
   
   },
-  prices:{
+  price:{
       type :Number,
       default :0
   },
