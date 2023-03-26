@@ -24,7 +24,7 @@ let newUser;
 let findCatagory;
 
 let order;
-let jol
+let jol =0;
 const login = false;
 let offer = {
   name: "None",
@@ -190,13 +190,11 @@ loadWishlist = async (req, res) => {
 
 const addCartDeleteWishlist = async (req, res) => {
   try {
-    console.log("1");
     userSession = req.session;
     const productId = req.query.id;
     const userData = await userSchema.findById({ _id: userSession.user_id });
     const productData = await produtModel.findById({ _id: productId });
     const add = await userData.addToCart(productData);
-    
     if (add) {
       await userData.removefromWishlist(productId);
     }
@@ -598,8 +596,9 @@ const placeOrder = async (req, res) => {
       .populate("cart.item.productId");
   
     let  totalPrice = userData.cart.totalPrice -jol
-
+       
       console.log("address", address);
+      console.log(totalPrice);
 
       
         order = await orderModel({
@@ -612,7 +611,7 @@ const placeOrder = async (req, res) => {
           zip: address.zip,
           mobile: address.mobile,
           products: userData.cart,
-          price :totalPrice
+          prices : totalPrice
         });
         console.log(order);
 
@@ -652,7 +651,7 @@ const placeOrder = async (req, res) => {
       }
  
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
 const loadOrderSuccess = async (req, res) => {
